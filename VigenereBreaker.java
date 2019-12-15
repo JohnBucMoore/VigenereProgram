@@ -28,5 +28,13 @@ public class VigenereBreaker {
         VigenereCipher vc = new VigenereCipher(key);
         System.out.println(vc.decrypt(text));
     }
-    
+
+    public HashSet<String> readDictionary(FileResource fr) {
+        HashSet<String> dictionary = new HashSet<>();
+        for (String line : fr.lines()) {
+            dictionary.add(line.toLowerCase());
+        }
+        return dictionary;
+    }
+
 }
