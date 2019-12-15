@@ -55,7 +55,7 @@ public class Tester {
          */
     }
 
-    public void testBreakForLanguage() {
+    public void testBreakForAllLangs() {
         VigenereBreaker vb = new VigenereBreaker();
         vb.breakVigenere();
     }
@@ -64,8 +64,8 @@ public class Tester {
         Tester t = new Tester();
         t.testCaesarCracker();
         t.testVigenereCipher();
-        t.testVigenereBreaker();
+        //t.testVigenereBreaker();
         //t.testReadDictionary();
-        t.testBreakForLanguage();
+        t.testBreakForAllLangs();
     }
 }
