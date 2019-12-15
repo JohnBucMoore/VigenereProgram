@@ -35,9 +35,17 @@ public class Tester {
         }
     }
 
+    public void testVigenereBreaker() {
+        VigenereBreaker vb = new VigenereBreaker();
+        System.out.println(vb.sliceString("abcdefghijklm", 2, 5));
+        VigenereBreaker vb2 = new VigenereBreaker();
+        vb2.breakVigenere();
+    }
+
     public static void main(String[] args) {
         Tester t = new Tester();
         t.testCaesarCracker();
         t.testVigenereCipher();
+        t.testVigenereBreaker();
     }
 }
