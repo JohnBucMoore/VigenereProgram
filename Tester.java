@@ -1,5 +1,7 @@
 import edu.duke.FileResource;
 
+import java.util.HashSet;
+
 public class Tester {
 
     public String testCaesarCipher() {
@@ -42,10 +44,28 @@ public class Tester {
         vb2.breakVigenere();
     }
 
+    public void testReadDictionary() {
+        FileResource fr = new FileResource("dictionaries/English");
+        VigenereBreaker vb = new VigenereBreaker();
+        HashSet<String> dictionary = vb.readDictionary(fr);
+        /*
+        for (String word : dictionary) {
+            System.out.println(word);
+        }
+         */
+    }
+
+    public void testBreakForLanguage() {
+        VigenereBreaker vb = new VigenereBreaker();
+        vb.breakVigenere();
+    }
+
     public static void main(String[] args) {
         Tester t = new Tester();
         t.testCaesarCracker();
         t.testVigenereCipher();
         t.testVigenereBreaker();
+        //t.testReadDictionary();
+        t.testBreakForLanguage();
     }
 }

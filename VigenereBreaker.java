@@ -23,10 +23,10 @@ public class VigenereBreaker {
     public void breakVigenere () {
         FileResource fr = new FileResource("VigenereTestData/athens_keyflute.txt");
         String text = fr.asString();
-        int[] key = tryKeyLength(text, 5, 'e');
-        //System.out.println(Arrays.toString(key));
-        VigenereCipher vc = new VigenereCipher(key);
-        System.out.println(vc.decrypt(text));
+        FileResource dict = new FileResource("dictionaries/English");
+        HashSet<String> dictionary = readDictionary(dict);
+        String decryption = breakForLanguage(text, dictionary);
+        System.out.println(decryption);
     }
 
     public HashSet<String> readDictionary(FileResource fr) {
@@ -37,4 +37,33 @@ public class VigenereBreaker {
         return dictionary;
     }
 
+    public int countWords(String message, HashSet<String> dictionary) {
+        int count = 0;
+        String[] words = message.split("\\W");
+        for (String word : words) {
+            if (dictionary.contains(word.toLowerCase())) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public String breakForLanguage(String encrypted, HashSet<String> dictionary) {
+        int max = 0;
+        int[] decryptionKey = new int[encrypted.length()];
+        int index = 0;
+        for (int i = 1; i < 100; i++) {
+            int[] key = tryKeyLength(encrypted, i, 'e');
+            VigenereCipher vc = new VigenereCipher(key);
+            String decryption = vc.decrypt(encrypted);
+            int count = countWords(decryption, dictionary);
+            if (count > max) {
+                max = count;
+                decryptionKey = key;
+                index = i;
+            }
+        }
+        VigenereCipher vc = new VigenereCipher(decryptionKey);
+        return vc.decrypt(encrypted);
+    }
 }
