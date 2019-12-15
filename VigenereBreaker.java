@@ -66,4 +66,32 @@ public class VigenereBreaker {
         VigenereCipher vc = new VigenereCipher(decryptionKey);
         return vc.decrypt(encrypted);
     }
+
+    private int getMaxIndex(int[] chars) {
+        int max = 0;
+        int maxIndex = 0;
+        for (int i = 0; i < chars.length; i++) {
+            if (chars[i] > max) {
+                max = chars[i];
+                maxIndex = i;
+            }
+        }
+        return maxIndex;
+    }
+
+    public char mostCommonCharln(HashSet<String> dictionary) {
+        String alpha = "abcdefghijklmnopqrstuvwxyz";
+        int[] chars = new int[26];
+        for (String word : dictionary) {
+            for (int i = 0; i < word.length(); i++) {
+                int index = alpha.indexOf(word.charAt(i));
+                chars[index]++;
+            }
+        }
+        return alpha.charAt(getMaxIndex(chars));
+    }
+
+    public void breakForAllLangs(String encrypted, HashMap<String, HashSet<String>> languages) {
+
+    }
 }
